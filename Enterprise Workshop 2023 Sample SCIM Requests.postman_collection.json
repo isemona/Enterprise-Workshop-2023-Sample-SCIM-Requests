@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "10a5b7da-b781-446a-9c58-007126b2ed3e",
+		"name": "Enterprise Workshop 2023 Sample SCIM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5051015",
+		"_collection_link": "https://speeding-station-943149.postman.co/workspace/SCIM-2.0-Testing~24c3887f-159d-4107-9b83-dd91d9337ea8/collection/5051015-10a5b7da-b781-446a-9c58-007126b2ed3e?action=share&source=collection_link&creator=5051015"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"request": {
+				"auth": {
+					"type": "digest",
+					"digest": [
+						{
+							"key": "password",
+							"value": "correct horse battery staple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob@tables.fake",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "MD5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 131313",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/scim+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3333/scim/v2/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"scim",
+						"v2",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users w/Filter \"userName\"",
+			"request": {
+				"auth": {
+					"type": "digest",
+					"digest": [
+						{
+							"key": "password",
+							"value": "correct horse battery staple",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bob@tables.fake",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "MD5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 131313",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/scim+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3333/scim/v2/Users?filter=userName%20eq%20%22trinity.red%40portal.example%22&startIndex=1&count=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"scim",
+						"v2",
+						"Users"
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "userName%20eq%20%22trinity.red%40portal.example%22"
+						},
+						{
+							"key": "startIndex",
+							"value": "1"
+						},
+						{
+							"key": "count",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 131313",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/scim+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3333/scim/v2/Users/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"scim",
+						"v2",
+						"Users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/scim+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 131313",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"schemas\": [\"urn:ietf:params:scim:schemas:core:2.0:User\"],\n    \"userName\": \"test.user@portal.example\",\n    \"name\": {\n        \"givenName\": \"Test\",\n        \"familyName\": \"User\"\n    },\n    \"emails\": [{\n        \"primary\": false,\n        \"value\": \"test.user@portal.example\",\n        \"type\": \"work\"\n    },{\n        \"primary\": true,\n        \"value\": \"test.user@portal.example\",\n        \"type\": \"work\"\n    }],\n    \"displayName\": \"Test User\",\n    \"locale\": \"en-US\",\n    \"externalId\": \"00ujl29u0le5T6Aj10h7\",\n    \"groups\": [],\n    \"password\": \"1mz050nq\",\n    \"active\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3333/scim/v2/Users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"scim",
+						"v2",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/scim+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 131313",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"schemas\": [\n        \"urn:ietf:params:scim:schemas:core:2.0:User\"\n    ],\n    \"locale\": \"en-US\",\n    \"groups\": [],\n    \"meta\": {\n        \"resourceType\": \"User\"\n    },\n    \"id\": \"5\",\n    \"userName\": \"newtest.user@portal.example\",\n    \"name\": {\n        \"givenName\": \"newTest\",\n        \"familyName\": \"User\"\n    },\n    \"emails\": [\n        {\n            \"primary\": true,\n            \"value\": \"newtest.user@portal.example\",\n            \"type\": \"work\"\n        }\n    ],\n    \"displayName\": \"Test User\",\n    \"externalId\": \"00ujl29u0le5T6Aj10h7\",\n    \"active\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3333/scim/v2/Users/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"scim",
+						"v2",
+						"Users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/scim+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 131313",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3333/scim/v2/Users/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"scim",
+						"v2",
+						"Users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/scim+json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 131313",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"schemas\": [\"urn:ietf:params:scim:api:messages:2.0:PatchOp\"],\n    \"Operations\": [{\n        \"op\": \"replace\",\n        \"value\": {\n            \"active\": false\n        }\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3333/scim/v2/Users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"scim",
+						"v2",
+						"Users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
